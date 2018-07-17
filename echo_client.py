@@ -38,10 +38,10 @@ def client(msg, log_buffer=sys.stderr):
         while True:
             chunk = sock.recv(16) # it can help with performance to help make the chunk of your memory
             # fit inside a page (which is 4Kb or 4096 bytes)
-            receive_message += chunk.decode() # chunk is in bytes so we need to decode it into character string
+            received_message += chunk.decode() # chunk is in bytes so we need to decode it into character string
             print('received "{0}"'.format(chunk.decode('utf8')), file=log_buffer)
 
-            if len(receive_message) >= len(msg):
+            if len(received_message) >= len(msg):
                 break
     except Exception as e:
         print(e)
@@ -57,7 +57,7 @@ def client(msg, log_buffer=sys.stderr):
         # TODO: when all is said and done, you should return the entire reply
         # you received from the server as the return value of this function.
         
-        return receive_message
+        return received_message
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
